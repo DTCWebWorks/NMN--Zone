@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NMNzone | Compare NMN Picks and Learn What to Look For</title>
+  <meta name="description" content="Compare featured NMN products, learn what to look for, and explore straightforward educational content on NMN and NAD+ support." />
+  <style>
+    :root {
+      --bg: #f4fbff;
+      --surface: #ffffff;
+      --surface-soft: #eef9ff;
+      --surface-softer: #f7fcff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #cfe8f6;
+      --primary: #0b84c8;
+      --primary-dark: #06679c;
+      --accent: #19b6d2;
+      --shadow: 0 12px 30px rgba(4, 62, 96, 0.10);
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(25, 182, 210, 0.10), transparent 28%),
+        linear-gradient(180deg, #f9fdff 0%, #f4fbff 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    .topline {
+      background: linear-gradient(135deg, rgba(25,182,210,0.14), rgba(11,132,200,0.16));
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+    .topline .container {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(207, 232, 246, 0.95);
+    }
+    .header-inner {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+    }
+    .brand-logo { width: 250px; height: auto; }
+    .nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .nav a { font-size: 15px; font-weight: 700; color: var(--muted); }
+    .nav a:hover { color: var(--primary-dark); }
+
+    .header-cta, .btn-primary, .pick-link, .cta-link, .article-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      color: #fff;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--primary-dark);
+      border: 1px solid var(--line);
+      font-weight: 800;
+    }
+
+    .hero { padding: 52px 0 28px; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 32px; align-items: center; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--primary-dark);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 16px; font-size: clamp(34px, 5vw, 62px); line-height: 1.03; letter-spacing: -0.03em; }
+    .hero p { margin: 0 0 18px; font-size: clamp(18px, 2.2vw, 22px); color: var(--muted); max-width: 760px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; }
+    .hero-note { font-size: 14px; color: #64748b; max-width: 760px; }
+
+    .hero-card, .section-card, .mini-card, .article-card, .faq-item, .product-card, .trust-inner, .final-cta-card, .table-wrap {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero-card { padding: 24px; position: relative; overflow: hidden; }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -35% auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(25,182,210,0.22), transparent 65%);
+      pointer-events: none;
+    }
+    .hero-logo-wrap { display: flex; align-items: center; justify-content: center; min-height: 280px; padding: 8px; }
+    .hero-logo { width: min(100%, 520px); height: auto; object-fit: contain; filter: drop-shadow(0 12px 24px rgba(6, 103, 156, 0.14)); }
+
+    .hero-mini-points, .trust-grid, .guide-grid, .article-grid, .faq-grid, .footer-grid {
+      display: grid;
+      gap: 18px;
+    }
+    .hero-mini-points { grid-template-columns: 1fr; margin-top: 14px; }
+    .trust-grid { grid-template-columns: repeat(4, 1fr); }
+    .guide-grid { grid-template-columns: repeat(4, 1fr); }
+    .article-grid { grid-template-columns: repeat(3, 1fr); }
+    .article-grid-large { grid-template-columns: repeat(3, 1fr); }
+    .faq-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1.15fr 0.85fr; }
+
+    .mini-point, .trust-item, .mini-card, .faq-item, .article-card, .product-card { padding: 20px; }
+    .mini-point {
+      background: rgba(255,255,255,0.84);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .trust-strip, .section, .articles, .final-cta { padding: 22px 0; }
+    .trust-inner { padding: 18px 22px; }
+    .trust-item {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      background: linear-gradient(180deg, #ffffff, #f8fcff);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .section-card { padding: 30px; }
+    h2 { margin: 0 0 14px; font-size: clamp(28px, 3vw, 40px); line-height: 1.1; }
+    .lead { margin: 0 0 24px; color: var(--muted); font-size: 18px; max-width: 920px; }
+    .guide-grid .mini-card h3, .faq-item h3, .article-card h3, .product-card h3 { margin: 0 0 10px; font-size: 22px; }
+    .guide-grid .mini-card p, .faq-item p, .article-card p, .product-card p, .footer-brand p, .footer-links p { margin: 0; color: var(--muted); }
+
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 20px; }
+    .product-card { background: linear-gradient(180deg, #ffffff 0%, #f8fcff 100%); display: flex; flex-direction: column; gap: 12px; }
+    .product-tag {
+      display: inline-block;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .price-row { font-size: 22px; font-weight: 800; color: var(--primary-dark); }
+    .rating-row { font-size: 15px; color: var(--muted); font-weight: 700; }
+    .feature-list { margin: 0; padding-left: 18px; color: var(--muted); }
+    .feature-list li { margin-bottom: 8px; }
+
+    .table-wrap { overflow-x: auto; padding: 10px; margin-top: 22px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 820px;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 15px;
+    }
+    th {
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .article-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f9fdff 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .article-kicker {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .article-link { width: fit-content; margin-top: auto; }
+
+    .disclosure, .small { font-size: 14px; color: #64748b; }
+    .final-cta-card { padding: 40px 24px; text-align: center; background: linear-gradient(135deg, rgba(25,182,210,0.09), rgba(11,132,200,0.12)); }
+    .final-cta p { max-width: 760px; margin: 0 auto 20px; color: var(--muted); font-size: 18px; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.84);
+      padding: 28px 0 36px;
+      margin-top: 20px;
+    }
+    .footer-brand img { width: 220px; margin-bottom: 14px; }
+    .footer-links a { display: inline-block; margin-right: 16px; margin-bottom: 12px; color: var(--primary-dark); font-weight: 700; }
+
+    @media (max-width: 1024px) {
+      .hero-grid, .products-grid, .guide-grid, .article-grid, .faq-grid, .footer-grid, .trust-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav { display: none; }
+      .hero-logo-wrap { min-height: 220px; }
+    }
+    @media (max-width: 640px) {
+      .brand-logo { width: 190px; }
+      .header-cta { min-height: 42px; padding: 0 14px; font-size: 14px; }
+      .hero { padding-top: 30px; }
+      .section-card, .hero-card, .mini-card, .article-card, .faq-item, .product-card, .final-cta-card { padding: 20px; }
+      .hero h1 { font-size: 34px; }
+      .hero p, .lead, .final-cta p { font-size: 17px; }
+      .topline .container { justify-content: center; }
+    }
+  
+    .section-card, .mini-card, .article-card, .faq-item, .product-card, .trust-inner, .final-cta-card, .table-wrap, .mini-point, .trust-item {
+      position: relative;
+      overflow: hidden;
+    }
+    .section-card::after, .mini-card::after, .article-card::after, .faq-item::after, .product-card::after, .trust-inner::after, .final-cta-card::after, .table-wrap::after, .mini-point::after, .trust-item::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0, 238, 255, 0.95) 0%, rgba(0, 180, 255, 0.78) 58%, rgba(0, 238, 255, 0.12) 100%);
+      box-shadow: 0 0 10px rgba(0, 214, 255, 0.34);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .section-card::before, .mini-card::before, .article-card::before, .faq-item::before, .product-card::before, .trust-inner::before, .final-cta-card::before, .table-wrap::before, .mini-point::before, .trust-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(0, 238, 255, 0.16) 0%, rgba(0, 238, 255, 0.95) 44%, rgba(0, 140, 255, 0.78) 100%);
+      box-shadow: 0 0 10px rgba(0, 214, 255, 0.34);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="topline">
+    <div class="container">Educational comparisons • Affiliate-supported • Not medical advice</div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" aria-label="NMNzone home">
+        <img src="images/nmnzone-logo.png" alt="NMNzone logo" class="brand-logo" />
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#compare">Compare</a>
+        <a href="#guide">How to Choose</a>
+        <a href="#faq">FAQ</a>
+        <a href="#articles">Articles</a>
+      </nav>
+
+      <a href="https://renuebyscience.com/products/lipo-nmn-powdered-liposomal-nmn2/?rfsn=8991232.81cd3a&utm_source=refersion&utm_medium=affiliate&utm_campaign=8991232.81cd3a" class="header-cta" target="_blank" rel="noopener noreferrer sponsored nofollow">
+        Shop Featured NMN
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Straightforward NMN comparisons and educational content</div>
+          <h1>Compare three NMN options, learn the basics fast, and browse a real article library without drowning in supplement confetti.</h1>
+          <p>
+            NMNzone helps visitors understand what NMN is, what shoppers usually compare,
+            and which products deserve a closer look. Clear picks. Clean layout. Less hype, more signal.
+          </p>
+
+          <div class="hero-actions">
+            <a href="https://renuebyscience.com/products/lipo-nmn-powdered-liposomal-nmn2/?rfsn=8991232.81cd3a&utm_source=refersion&utm_medium=affiliate&utm_campaign=8991232.81cd3a" class="btn-primary" target="_blank" rel="noopener noreferrer sponsored nofollow">View Featured Pick</a>
+            <a href="#compare" class="btn-secondary">Compare All 3</a>
+          </div>
+
+          <p class="hero-note">
+            Affiliate disclosure: This site contains affiliate links. If you click a product link and make a purchase,
+            NMNzone may earn a commission at no extra cost to you. Content here is informational only and is not medical advice.
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-logo-wrap">
+            <img src="images/nmnzone-logo.png" alt="NMNzone brand image" class="hero-logo" />
+          </div>
+          <div class="hero-mini-points">
+            <div class="mini-point">1 featured Reneu by Science product</div>
+            <div class="mini-point">2 Amazon comparison options</div>
+            <div class="mini-point">3 real article pages ready to click</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip">
+      <div class="container trust-inner">
+        <div class="trust-grid">
+          <div class="trust-item">Simple product comparison</div>
+          <div class="trust-item">Clear affiliate disclosure</div>
+          <div class="trust-item">Educational framing first</div>
+          <div class="trust-item">Clean click-focused layout</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="compare">
+      <div class="container">
+        <div class="section-card">
+          <h2>Featured NMN picks</h2>
+          <p class="lead">
+            One featured liposomal pick from Reneu by Science and two Amazon comparison options.
+            Now the homepage has a real comparison spine instead of placeholder cardboard.
+          </p>
+
+          <div class="products-grid">
+            <article class="product-card">
+              <div class="product-tag">Featured Pick</div>
+              <h3>Reneu By Science LIPO NMN Powdered Liposomal NMN</h3>
+              <div class="price-row">Featured affiliate link</div>
+              <div class="rating-row">Liposomal angle • Main hero CTA product</div>
+              <p>
+                The main product anchored throughout the homepage. Best for the hero button, featured CTA,
+                and sitewide start-here positioning.
+              </p>
+              <ul class="feature-list">
+                <li>Main homepage focus</li>
+                <li>Liposomal positioning</li>
+                <li>Best fit for primary click flow</li>
+              </ul>
+              <a href="https://renuebyscience.com/products/lipo-nmn-powdered-liposomal-nmn2/?rfsn=8991232.81cd3a&utm_source=refersion&utm_medium=affiliate&utm_campaign=8991232.81cd3a" class="pick-link" target="_blank" rel="noopener noreferrer sponsored nofollow">View Reneu By Science</a>
+            </article>
+
+            <article class="product-card">
+              <div class="product-tag">Amazon Pick</div>
+              <h3>Genex Formulas NMN 500mg</h3>
+              <div class="price-row">$59.99</div>
+              <div class="rating-row">4.4/5 stars • 219 ratings • Amazon's Choice</div>
+              <p>
+                A shelf-stabilized capsule option with a simpler formula and a cleaner value angle for shoppers who like less ingredient clutter.
+              </p>
+              <ul class="feature-list">
+                <li>500mg per serving</li>
+                <li>60 capsules</li>
+                <li>GMP certified</li>
+              </ul>
+              <a href="https://amzn.to/4t1IfRQ" class="pick-link" target="_blank" rel="noopener noreferrer sponsored nofollow">View Genex on Amazon</a>
+            </article>
+
+            <article class="product-card">
+              <div class="product-tag">Amazon Pick</div>
+              <h3>Codeage Liposomal NMN Platinum</h3>
+              <div class="price-row">$79.99</div>
+              <div class="rating-row">4.2/5 stars • 124 ratings • 500+ bought last month</div>
+              <p>
+                A more stacked formula with NMN plus quercetin, resveratrol, betaine TMG, riboflavin, and B12 for people who like a combo approach.
+              </p>
+              <ul class="feature-list">
+                <li>500mg NMN</li>
+                <li>90 capsules</li>
+                <li>Liposomal multi-ingredient angle</li>
+              </ul>
+              <a href="https://amzn.to/4bDte1w" class="pick-link" target="_blank" rel="noopener noreferrer sponsored nofollow">View Codeage on Amazon</a>
+            </article>
+          </div>
+
+          <div class="table-wrap">
+            <table aria-label="NMN comparison table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Format</th>
+                  <th>NMN Amount</th>
+                  <th>Bottle Size</th>
+                  <th>Price</th>
+                  <th>Formula Style</th>
+                  <th>Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Reneu By Science LIPO NMN</td>
+                  <td>Powdered liposomal</td>
+                  <td>See product page</td>
+                  <td>See product page</td>
+                  <td>Visit link</td>
+                  <td>Liposomal featured pick</td>
+                  <td>Visitors who want the main site recommendation</td>
+                </tr>
+                <tr>
+                  <td>Genex Formulas NMN 500mg</td>
+                  <td>Capsules</td>
+                  <td>500mg per serving</td>
+                  <td>60 capsules</td>
+                  <td>$59.99</td>
+                  <td>Simple formula</td>
+                  <td>Shoppers who want a cleaner, more straightforward option</td>
+                </tr>
+                <tr>
+                  <td>Codeage Liposomal NMN Platinum</td>
+                  <td>Liposomal capsules</td>
+                  <td>500mg</td>
+                  <td>90 capsules</td>
+                  <td>$79.99</td>
+                  <td>Combo formula with extras</td>
+                  <td>Shoppers who want a more loaded ingredient stack</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="disclosure" style="margin-top:20px;">
+            Product pricing, ratings, review counts, and availability can change. Always verify current details on the product page before purchasing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="guide">
+      <div class="container">
+        <div class="section-card">
+          <h2>How to choose an NMN product</h2>
+          <p class="lead">
+            Most shoppers are not trying to win a supplement PhD in one afternoon. They usually just want a cleaner way to compare the basics.
+          </p>
+
+          <div class="guide-grid">
+            <div class="mini-card">
+              <h3>Delivery format</h3>
+              <p>Compare plain capsules, powders, and liposomal options. Delivery format is often one of the first forks in the road.</p>
+            </div>
+            <div class="mini-card">
+              <h3>Dosage</h3>
+              <p>Look at milligrams per serving, capsule count, and how long one bottle lasts instead of staring only at the front label.</p>
+            </div>
+            <div class="mini-card">
+              <h3>Formula style</h3>
+              <p>Some products keep things simple. Others add ingredients like resveratrol, quercetin, TMG, B vitamins, or other extras.</p>
+            </div>
+            <div class="mini-card">
+              <h3>Brand transparency</h3>
+              <p>Check the product page for manufacturing notes, testing language, and whether the company explains the formula clearly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="articles" id="articles">
+      <div class="container">
+        <h2>17-article NMN library</h2>
+        <p class="lead">
+          The cards below are live and clickable now. This turns NMNzone into a real content hub instead of a one-page brochure with nice hair.
+        </p>
+
+        <div class="article-grid article-grid-large">
+          <article class="article-card"><div class="article-kicker">Beginner guide</div><h3>What is NMN and why do people compare it to NAD+ support?</h3><p>Learn what NMN is, why people compare it to NAD+ support, and what shoppers usually want to understand before buying.</p><a class="article-link" href="what-is-nmn.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Comparison</div><h3>Liposomal NMN vs regular NMN capsules</h3><p>Compare liposomal NMN and regular NMN capsules in plain English, including convenience, formula style, and shopping factors.</p><a class="article-link" href="liposomal-vs-regular-nmn.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Shopping guide</div><h3>What to look for before buying an NMN supplement</h3><p>Learn the main things to compare before buying an NMN supplement, including dosage, delivery format, formula style, and transparency.</p><a class="article-link" href="how-to-choose-nmn.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Beginner guide</div><h3>NMN vs NR: why shoppers compare them</h3><p>Understand why shoppers compare NMN and NR, what the comparison really means, and how to think about the category without getting lost.</p><a class="article-link" href="nmn-vs-nr.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Comparison</div><h3>How to compare price per serving on NMN products</h3><p>Learn how to compare NMN products using price per serving instead of sticker shock alone.</p><a class="article-link" href="price-per-serving-nmn.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Comparison</div><h3>NMN powder vs capsules: which style feels simpler?</h3><p>Compare NMN powder and capsule formats in terms of convenience, simplicity, and product positioning.</p><a class="article-link" href="nmn-powder-vs-capsules.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Ingredients</div><h3>Why some NMN formulas add resveratrol, quercetin, or TMG</h3><p>Learn why some NMN formulas include added ingredients like resveratrol, quercetin, or TMG and how to compare stacked formulas.</p><a class="article-link" href="stacked-nmn-ingredients.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Trust guide</div><h3>What third-party testing means for supplement shoppers</h3><p>Understand what third-party testing language means on supplement pages and why it matters when comparing NMN products.</p><a class="article-link" href="third-party-testing-nmn.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Beginner guide</div><h3>How to read an NMN label without getting lost</h3><p>A beginner-friendly guide to reading NMN labels, including serving size, capsule count, formula style, and shopping clues.</p><a class="article-link" href="how-to-read-an-nmn-label.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Comparison</div><h3>Is liposomal NMN worth it for shoppers who want a premium option?</h3><p>A plain-English look at whether liposomal NMN may feel worth it to shoppers comparing premium-style products.</p><a class="article-link" href="is-liposomal-nmn-worth-it.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Shopping guide</div><h3>How many servings are in an NMN bottle, and why it matters</h3><p>Learn why total serving count is one of the most important details when comparing NMN products.</p><a class="article-link" href="how-many-servings-in-an-nmn-bottle.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Beginner guide</div><h3>What is the best NMN format for beginners?</h3><p>A simple guide to choosing the best NMN format for beginners based on clarity, convenience, and comparison ease.</p><a class="article-link" href="best-nmn-format-for-beginners.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Comparison</div><h3>Simple NMN formulas vs stacked formulas</h3><p>Compare simple NMN products and stacked formulas with added ingredients, and learn which style may fit different shoppers.</p><a class="article-link" href="simple-vs-stacked-nmn-formulas.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Shopping guide</div><h3>How to build a shortlist of NMN products without getting overwhelmed</h3><p>Learn how to narrow a long list of NMN options into a clean shortlist you can actually compare.</p><a class="article-link" href="build-a-shortlist-of-nmn-products.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Checklist</div><h3>Common mistakes people make when shopping for NMN</h3><p>Avoid common NMN shopping mistakes like focusing only on price, ignoring serving count, or comparing unlike formulas.</p><a class="article-link" href="common-mistakes-shopping-for-nmn.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Featured pick</div><h3>Why Reneu by Science is the featured product on NMNzone</h3><p>Learn why Reneu by Science is used as the featured NMN pick on NMNzone and how it fits the site’s comparison strategy.</p><a class="article-link" href="why-reneu-by-science-is-featured.html">Read article</a></article> <article class="article-card"><div class="article-kicker">Checklist</div><h3>Questions to ask before buying any NMN supplement</h3><p>A simple checklist of questions to ask before buying any NMN supplement, including format, servings, formula style, and transparency.</p><a class="article-link" href="questions-before-buying-nmn.html">Read article</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-card">
+          <h2>FAQ</h2>
+          <p class="lead">A few easy answers to the questions visitors usually have right away.</p>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h3>Is NMN the same as NAD+?</h3>
+              <p>No. NMN is a separate compound related to the body’s NAD+ pathway. Shoppers often compare them because they are discussed in similar circles.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Does NMNzone give medical advice?</h3>
+              <p>No. This site is educational and affiliate-based. It is designed to help visitors compare products and understand common shopping factors.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Why are there affiliate links here?</h3>
+              <p>Some product links may pay a commission if a visitor buys through them. That helps support the site at no extra cost to the shopper.</p>
+            </div>
+            <div class="faq-item">
+              <h3>What should I compare first?</h3>
+              <p>Start with delivery format, dosage, ingredient profile, capsule count, and price per serving. Those basics usually clear away a lot of confusion.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <div class="final-cta-card">
+          <h2>Ready to start with the featured pick?</h2>
+          <p>
+            Begin with the main Reneu by Science product, or compare all three options first if you want a broader feel for the field.
+          </p>
+          <a href="https://renuebyscience.com/products/lipo-nmn-powdered-liposomal-nmn2/?rfsn=8991232.81cd3a&utm_source=refersion&utm_medium=affiliate&utm_campaign=8991232.81cd3a" class="cta-link" target="_blank" rel="noopener noreferrer sponsored nofollow">View Featured NMN</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="images/nmnzone-logo.png" alt="NMNzone footer logo" />
+        <p>
+          NMNzone is an educational affiliate website focused on helping visitors compare NMN products and understand key shopping factors.
+        </p>
+        <p class="small" style="margin-top:10px;">
+          These statements have not been evaluated by the Food and Drug Administration. This website is not intended to diagnose, treat, cure, or prevent any disease.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <p><strong>Quick Links</strong></p>
+        <a href="index.html#compare">Compare</a>
+        <a href="index.html#guide">How to Choose</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="what-is-nmn.html">What Is NMN?</a>
+        <a href="liposomal-vs-regular-nmn.html">Liposomal vs Regular</a>
+        <a href="how-to-choose-nmn.html">Buying Guide</a>
+        <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
